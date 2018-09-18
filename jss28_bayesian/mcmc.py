@@ -20,3 +20,4 @@ class MCMC_Metropoolis:
 
             for _ in range(self.thin):
                 s = self.x + self.step * np.random.randn(*self.x.shape)
+                # r =

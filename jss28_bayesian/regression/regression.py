@@ -1,6 +1,7 @@
 import numpy as np
 
 def generate_from_normal(num, **kwargs):
+    np.random.normal()
     raise NotImplementedError
 
 def generate_from_uniform():
