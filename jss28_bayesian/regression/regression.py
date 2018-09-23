@@ -1,16 +1,19 @@
 import numpy as np
 
+
+# loc, scale
 def generate_from_normal(num, **kwargs):
-    np.random.normal()
-    raise NotImplementedError
+    return np.random.normal(size=num, **kwargs)
+
 
 def generate_from_uniform():
     raise NotImplementedError
 
-class RegressionModel():
-    def __init__(self):
-        beta = {}
-        error = {}
+
+class RegressionModel:
+    def __init__(self, **kwargs):
+        self.datax = generate_from_normal(kwargs.get('shape', 1))  # n x k
+        #self.datay  =
 
     # params of distribution should be passed
     def simulate_data(self, beta_num, beta_distrib='normal', error='normal', **kwargs):

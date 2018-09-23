@@ -1,7 +1,6 @@
 __author__ = 'Maria Khodorchenko'
 import numpy as np
 
-
 class MCMC_Metropoolis:
     def __init__(self, x, func, step, thin=1):
         self.x = x
