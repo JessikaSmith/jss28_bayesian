@@ -3,7 +3,7 @@ import numpy as np
 
 # loc, scale
 def generate_from_normal(num, **kwargs):
-    return np.random.normal(size=num, **kwargs)
+    return np.random.normal(size=num, scale=kwargs.get('scale', 1))
 
 
 def generate_from_uniform():
@@ -12,7 +12,8 @@ def generate_from_uniform():
 
 class RegressionModel:
     def __init__(self, **kwargs):
-        self.datax = generate_from_normal(kwargs.get('shape', 1))  # n x k
+        self.datax = generate_from_normal(kwargs.get('shape', 1), scale=10)  # n x k
+        self.datay = generate_from_normal(kwargs.get('shape', 1)[0])  # n x k
         #self.datay  =
 
     # params of distribution should be passed
