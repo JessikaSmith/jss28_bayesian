@@ -36,7 +36,7 @@ class Model:
             likelihood = pm.Normal('estimated', mu=(alpha + _sum + e).astype('float32'),
                                    sd=sigma.astype('float32'), shape=100, observed=ydata)
             step = pm.Metropolis()
-            trace = pm.sample(200) #cores=multiprocessing.cpu_count())
+            trace = pm.sample(5000)
         self.trace = [trace['alpha'], trace['theta'], trace['sigma'], trace['e']]
 
     def testModel(self):
