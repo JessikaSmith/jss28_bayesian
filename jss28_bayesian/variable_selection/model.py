@@ -22,7 +22,7 @@ class Model:
     def loglikelihood_s(self, x):
         return -tt.log(np.abs(x))
 
-    def createModel(self, xdata, ydata=None):
+    def createModel(self, xdata, ydata=None, trace_len=200):
         shape = xdata.shape
         with pm.Model() as model:
             alpha = pm.Normal('alpha', mu=0, sd=100)
@@ -36,7 +36,7 @@ class Model:
             likelihood = pm.Normal('estimated', mu=(alpha + _sum + e).astype('float32'),
                                    sd=sigma.astype('float32'), shape=100, observed=ydata)
             step = pm.Metropolis()
-            trace = pm.sample(5000)
+            trace = pm.sample(trace_len, step=step)
         self.trace = [trace['alpha'], trace['theta'], trace['sigma'], trace['e']]
 
     def testModel(self):
