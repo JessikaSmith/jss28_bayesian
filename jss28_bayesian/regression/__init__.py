@@ -1,0 +1,1 @@
+from jss28_bayesian.regression.regression import RegressionModel
