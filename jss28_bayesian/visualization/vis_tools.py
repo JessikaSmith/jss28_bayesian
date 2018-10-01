@@ -18,3 +18,19 @@ def plot_params(N_SAMPLES, alpha_samples, theta_samples):
              color='darkblue', bins=30, alpha=0.8, density=True)
     plt.ylabel('Probability Density')
     plt.show()
+
+
+def plot_trace(alpha_samples, theta_samples):
+    # Plot alpha trace
+    plt.subplot(211)
+    plt.title(r'Trace of $\alpha$')
+    plt.plot(alpha_samples, color = 'darkred')
+    plt.xlabel('Samples'); plt.ylabel('Parameter')
+
+    # Plot beta trace
+    plt.subplot(212)
+    plt.title(r'Trace of $\beta$')
+    plt.plot(theta_samples, color='b')
+    plt.xlabel('Samples'); plt.ylabel('Parameter')
+    plt.tight_layout(h_pad=0.8)
+    plt.show()

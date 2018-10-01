@@ -28,16 +28,16 @@ class Model:
             alpha = pm.Normal('alpha', mu=0, sd=100)
             theta = pm.DensityDist('theta', self.loglikelihood_t, shape=30, testval=0)
             sigma = pm.DensityDist('sigma', self.loglikelihood_s, testval=1)
-            e = pm.Normal('e', mu=0, sd=1, shape=100)
             _sum = theta[0] * xdata[:, 0]
             for i in range(1, shape[1]):
                 _sum += theta[i] * xdata[:, i]
-            print(_sum)
-            likelihood = pm.Normal('estimated', mu=(alpha + _sum + e).astype('float32'),
+            likelihood = pm.Normal('estimated', mu=(alpha + _sum).astype('float32'),
                                    sd=sigma.astype('float32'), shape=100, observed=ydata)
             step = pm.Metropolis()
-            trace = pm.sample(trace_len, step=step)
-        self.trace = [trace['alpha'], trace['theta'], trace['sigma'], trace['e']]
+            trace = pm.sample(trace_len, njobs=4)
+        self.trace = trace
+        pm.traceplot(trace, ['sigma', 'theta'])
+        pm.autocorrplot(trace, ['sigma', 'theta'])
 
     def testModel(self):
         n = 100
